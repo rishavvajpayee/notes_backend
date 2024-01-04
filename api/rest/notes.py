@@ -25,7 +25,7 @@ from api.domain.notes_domain import get_notes, post_notes
 NOTES_BLUEPRINT = Blueprint("notes", __name__, url_prefix="/api/")
 
 
-@NOTES_BLUEPRINT.route("notes", methods=["GET","POST"])
+@NOTES_BLUEPRINT.route("notes", methods=["GET", "POST"])
 def post_signup():
     if request.method == "GET":
         code, message, result = get_notes()

@@ -30,19 +30,22 @@ def is_authenticated(token):
     """
     decodes the token and checks if it exists in out DB
     """
-    code, payload = decode_token(token) # assume the user is authenticated at all times
+    code, payload = decode_token(token)  # assume the user is authenticated at all times
     if code == 200:
         user_id = payload.get("user_id", None)
         return True, user_id
     else:
         return False, None
 
+
 def before_check():
     url = request.path
-    whitelist_api = Config.WHITELIST_API.replace(" ", "").split(",") if Config.WHITELIST_API else []
+    whitelist_api = (
+        Config.WHITELIST_API.replace(" ", "").split(",") if Config.WHITELIST_API else []
+    )
     if request.method == "OPTIONS" or url in whitelist_api:
         return None
-    
+
     if "Accesstoken" in request.headers:
         token = request.headers["Accesstoken"]
         authenticated, valid_user_token = is_authenticated(token)

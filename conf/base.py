@@ -11,6 +11,7 @@ from flask import g
 Session = sessionmaker(bind=Config.engine, autoflush=False)
 base = declarative_base()
 
+
 class EnumStatus(enum.Enum):
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

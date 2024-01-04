@@ -13,13 +13,16 @@ CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.SQLALCHEMY_DATABASE_URI
 
+
 @app.before_request
 def before_request():
     return before_check()
 
+
 @app.route("/", methods=["GET"])
 def health_check():
-    return handle_response(200, common["SUCCESS"], {"status" : "Working"})
+    return handle_response(200, common["SUCCESS"], {"status": "Working"})
+
 
 if __name__ == "__main__":
     """

@@ -113,6 +113,7 @@ def response_success(code, message, result):
         result=result,
     )
 
+
 def response_failure(code, message, result):
     return Responses.failure(
         code=code,
@@ -120,6 +121,7 @@ def response_failure(code, message, result):
         alert_msg_type=common["FAILURE_ALERT"],
         result=result,
     )
+
 
 def handle_response(code, message, result):
     if code == 200:
