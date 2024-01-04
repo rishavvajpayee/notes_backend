@@ -14,7 +14,7 @@
 
 from constants import common
 from flask import Blueprint, request
-from utils.responses import Responses, response_success, response_failure
+from utils.responses import handle_response
 
 """
 Import Domain Functions : 
@@ -31,8 +31,4 @@ def post_signup():
         code, message, result = get_notes()
     elif request.method == "POST":
         code, message, result = post_notes()
-
-    if code == 200:
-        return response_success(message, result)
-    else:
-        return response_failure(message, result)
+    handle_response(code, message, result)

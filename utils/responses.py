@@ -105,7 +105,7 @@ class Responses:
         return Response(json.dumps(resp, cls=JSONEncoder), mimetype="text/json"), code
 
 
-def response_success(message, result):
+def response_success(code, message, result):
     return Responses.success(
         code=common["SUCCESS"],
         alert_msg_description=message,
@@ -113,9 +113,9 @@ def response_success(message, result):
         result=result,
     )
 
-def response_failure(message, result):
+def response_failure(code, message, result):
     return Responses.failure(
-        code=common["FAILURE"],
+        code=code,
         alert_msg_description=message,
         alert_msg_type=common["FAILURE_ALERT"],
         result=result,
@@ -123,6 +123,6 @@ def response_failure(message, result):
 
 def handle_response(code, message, result):
     if code == 200:
-        return response_success(message, result)
+        return response_success(code, message, result)
     else:
-        return response_failure(message, result)
+        return response_failure(code, message, result)
