@@ -39,7 +39,7 @@ def is_authenticated(token):
 
 def before_check():
     url = request.path
-    whitelist_api = Config.WHITELIST_API.split(",") if Config.WHITELIST_API else []
+    whitelist_api = Config.WHITELIST_API.replace(" ", "").split(",") if Config.WHITELIST_API else []
     if request.method == "OPTIONS" or url in whitelist_api:
         return None
     
@@ -49,5 +49,5 @@ def before_check():
 
         if authenticated:
             g.user_id = valid_user_token
-        return response_failure("Token Validation failed", {})
-    return response_failure("Invalid Request | accesstoken not provided", {})
+        return response_failure(400, "Token Validation failed", {})
+    return response_failure(400, "Invalid Request | accesstoken not provided", {})
