@@ -13,7 +13,7 @@ class Config:
     DEBUG = True if os.getenv("DEBUG") == "True" else False
     DEVELOPMENT = True
     CSRF_ENABLED = True
-    SECRET_KEY = "secret"
+    SECRET_KEY = os.getenv("SECRET_KEY", os.getenv("AMIAGENIUS", os.getenv("THISISAJOKE")))
     CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*")
     CORS_METHODS = os.getenv("CORS_METHODS", "GET,POST,PUT,DELETE").split(",")
     PORT = 5000
