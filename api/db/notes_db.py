@@ -3,12 +3,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from conf.base import Base
 
-
-class Test(Base):
-    __tablename__ = "Test"
-    id = Column(Integer, primary_key=True)
-
-
 class Note(Base):
     __tablename__ = "notes"
 

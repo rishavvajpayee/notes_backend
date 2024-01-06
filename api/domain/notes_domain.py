@@ -2,7 +2,6 @@
 Domain expansions for onBoarding Notes
 """
 
-import random
 from flask_sqlalchemy_session import current_session as session
 from flask import g, request
 from constants import common
@@ -26,5 +25,30 @@ def get_notes():
 
 def post_notes():
     user_id = g.user_id
+    data = request.json
+    note = session.query(Note).filter(
+        Note.user_id == user_id,
+        Note.title == data["title"]
+    ).first()
+
+    if note:
+        response = {}
+        response["id"] = note.id
+        response["title"] = note.title
+        response["content"] =  note.content
+        response["user_id"] = note.user_id
+
+        return 200, "Note already Exist", response 
+    else:
+        try :
+            note = Note(
+                user_id = g.user_id,
+                title = data["title"],
+                content = data["content"]
+            )
+            return 200, "note creation successfull", note.to_dict()
     
+        except Exception as error:
+            return 400, f"failed : {error}", {}
+        
 
