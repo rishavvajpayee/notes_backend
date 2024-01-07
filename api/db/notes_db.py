@@ -2,17 +2,12 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from conf.base import Base
-
-
-class Test(Base):
-    __tablename__ = "Test"
-    id = Column(Integer, primary_key=True)
-
+from sqlalchemy.dialects.postgresql import UUID
 
 class Note(Base):
     __tablename__ = "notes"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(UUID(as_uuid=True), primary_key=True)
     title = Column(String(255), nullable=False)
     content = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -20,7 +15,7 @@ class Note(Base):
 
     """Foreign key relationship with User"""
     user_id = Column(
-        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     user = relationship("User", backref="notes")
 
@@ -32,15 +27,15 @@ class SharedNote(Base):
 
     __tablename__ = "shared_notes"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(UUID(as_uuid=True), primary_key=True)
     note_id = Column(
-        Integer, ForeignKey("notes.id", ondelete="CASCADE"), nullable=False
+        UUID(as_uuid=True), ForeignKey("notes.id", ondelete="CASCADE"), nullable=False
     )
     shared_with_user_id = Column(
-        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     shared_by_user_id = Column(
-        Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     shared_at = Column(DateTime(timezone=True), server_default=func.now())
 
