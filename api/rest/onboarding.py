@@ -12,10 +12,10 @@ AUTHENTICATION_BLUEPRINT = Blueprint("login", __name__, url_prefix="/api/auth/")
 @AUTHENTICATION_BLUEPRINT.route("signup", methods=["POST"])
 def post_signup():
     code, message, result = signup()
-    handle_response(code, message, result)
+    return handle_response(code, message, result)
 
 
 @AUTHENTICATION_BLUEPRINT.route("login", methods=["POST"])
 def post_login():
     code, message, result = login()
-    handle_response(code, message, result)
+    return handle_response(code, message, result)

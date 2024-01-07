@@ -52,5 +52,6 @@ def before_check():
 
         if authenticated:
             g.user_id = valid_user_token
+            return None
         return response_failure(400, "Token Validation failed", {})
     return response_failure(400, "Invalid Request | accesstoken not provided", {})

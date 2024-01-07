@@ -12,7 +12,6 @@
 7. GET /api/search?q=:query: search for notes based on keywords for the authenticated user.
 """
 
-from constants import common
 from flask import Blueprint, request
 from utils.responses import handle_response
 
@@ -31,4 +30,4 @@ def post_signup():
         code, message, result = get_notes()
     elif request.method == "POST":
         code, message, result = post_notes()
-    handle_response(code, message, result)
+    return handle_response(code, message, result)
