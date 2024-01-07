@@ -1,10 +1,11 @@
 from utils.responses import handle_response
 from flask import Blueprint
+from api.domain.onboarding_domain import login, signup
 
 """
 IMPORT DOMAIN FUNCTIONS :
 """
-from api.domain.onboarding_domain import login, signup
+
 
 AUTHENTICATION_BLUEPRINT = Blueprint("login", __name__, url_prefix="/api/auth/")
 

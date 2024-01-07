@@ -14,11 +14,11 @@
 
 from flask import Blueprint, request
 from utils.responses import handle_response
+from api.domain.notes_domain import get_notes, post_notes
 
 """
 Import Domain Functions : 
 """
-from api.domain.notes_domain import get_notes, post_notes
 
 
 NOTES_BLUEPRINT = Blueprint("notes", __name__, url_prefix="/api/")
@@ -30,4 +30,6 @@ def post_signup():
         code, message, result = get_notes()
     elif request.method == "POST":
         code, message, result = post_notes()
+    else:
+        code, message, result = 400, "method not found", {}
     return handle_response(code, message, result)
