@@ -15,7 +15,7 @@ class Config:
     DEVELOPMENT = True
     CSRF_ENABLED = True
     SECRET_KEY = os.getenv(
-        "SECRET_KEY", os.getenv("AMIAGENIUS", os.getenv("THISISAJOKE"))
+        "SECRET_KEY", os.getenv("AMIAGENIUS", os.getenv("THISISAJOKE", "SECRET"))
     )
     CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*")
     CORS_METHODS = os.getenv("CORS_METHODS", "GET,POST,PUT,DELETE").split(",")

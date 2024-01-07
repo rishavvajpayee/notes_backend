@@ -1,8 +1,7 @@
 import jwt
 from dotenv import load_dotenv
 from conf.base import Config
-from datetime import datetime, timedelta
-from flask import Blueprint, Response, g, redirect, request
+from flask import g, request
 from utils.responses import response_failure
 
 load_dotenv()
@@ -21,9 +20,9 @@ def decode_token(token):
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         return 200, payload
     except jwt.ExpiredSignatureError:
-        return 400, "Token has expired."
+        return 400, {"user_id": None}
     except jwt.InvalidTokenError:
-        return 400, "Invalid token."
+        return 400, {"user_id": None}
 
 
 def is_authenticated(token):
