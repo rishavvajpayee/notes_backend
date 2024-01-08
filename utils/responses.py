@@ -4,8 +4,6 @@ import datetime
 from decimal import Decimal
 import json
 import os
-from flask import Response, request, g
-from datetime import datetime
 from constants import common
 
 DEBUG_MODE = os.getenv("DEBUG_MODE", 0)
@@ -59,7 +57,7 @@ class Responses:
                 "status": status if status else "failure",
                 "alert": [
                     {
-                        "message": alert_msg_description,
+                        "message": description,
                         "type": alert_msg_type,
                     }
                 ],
@@ -70,7 +68,7 @@ class Responses:
         if is_data:
             resp["data"] = result
         if is_access_log_required:
-            response_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f")
+            _ = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f")
             """log_data(request=request, response=None, request_time=g.request_time,
                      response_time=response_time, response_data=resp, response_header={})"""
         return Response(json.dumps(resp, cls=JSONEncoder), mimetype="text/json"), code

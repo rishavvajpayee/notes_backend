@@ -6,7 +6,7 @@ class APIError(Exception):
 
     def __init__(self, error_description, status=None, data=None, *args, **kwargs):
         super(APIError, self).__init__(*args, **kwargs)
-        if type(error_description) is dict:
+        if isinstance(error_description, dict):
             self.error_code = error_description.get("code", None)
             self.description = error_description.get("message", "")
             self.server_error = error_description.get("server_error", True)
